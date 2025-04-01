@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Linkedin, Github, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Github, Twitter, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -236,17 +236,33 @@ const ContactSection = () => {
                   href="http://topmate.io/noel_regis"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-background p-3 rounded-full hover:bg-primary/10 transition-colors"
+                  className="bg-primary/90 hover:bg-primary p-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
                   aria-label="Topmate"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" className="h-6 w-6">
-                    <path d="M19.4,7.3L19.1,7c0,0-0.1-0.1-0.1-0.1l-0.9-0.4c0,0-0.1,0-0.1-0.1l-1.4-0.3C12.7,4.1,8.1,6.9,8.1,6.9L6.5,8.1L4.8,10.5
-                    l-0.3,2.9l0.2,1.8l0,0c0.2,1.1,0.6,2.1,1.2,3l0.8,1.2l1.7,1.8l1.3,0.8c0.1,0.1,0.3,0.1,0.4,0.2l1.5,0.6c1.8,0.6,3.8,0.5,5.5-0.1
-                    l2.1-1l1.1-1.1c0,0,0,0,0,0c0.1-0.1,0.2-0.3,0.3-0.4l1.2-2.1c0.3-0.5,0.4-1.1,0.5-1.6l0.4-2.9L19.4,7.3z M12,17.7
-                    c-3.1,0-5.7-2.5-5.7-5.7c0-3.1,2.5-5.7,5.7-5.7c3.1,0,5.7,2.5,5.7,5.7C17.7,15.2,15.1,17.7,12,17.7z"/>
-                    <path d="M12,7.8c-2.3,0-4.2,1.9-4.2,4.2c0,2.3,1.9,4.2,4.2,4.2c2.3,0,4.2-1.9,4.2-4.2C16.2,9.7,14.3,7.8,12,7.8z M13.6,14.3h-3.1
-                    v-0.9h1.1v-3.1h-1.1V9.5h2v3.9h1.1V14.3z"/>
-                  </svg>
+                  <div className="relative flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none" className="h-6 w-6">
+                      <path d="M19.4,7.3L19.1,7c0,0-0.1-0.1-0.1-0.1l-0.9-0.4c0,0-0.1,0-0.1-0.1l-1.4-0.3C12.7,4.1,8.1,6.9,8.1,6.9L6.5,8.1L4.8,10.5
+                      l-0.3,2.9l0.2,1.8l0,0c0.2,1.1,0.6,2.1,1.2,3l0.8,1.2l1.7,1.8l1.3,0.8c0.1,0.1,0.3,0.1,0.4,0.2l1.5,0.6c1.8,0.6,3.8,0.5,5.5-0.1
+                      l2.1-1l1.1-1.1c0,0,0,0,0,0c0.1-0.1,0.2-0.3,0.3-0.4l1.2-2.1c0.3-0.5,0.4-1.1,0.5-1.6l0.4-2.9L19.4,7.3z M12,17.7
+                      c-3.1,0-5.7-2.5-5.7-5.7c0-3.1,2.5-5.7,5.7-5.7c3.1,0,5.7,2.5,5.7,5.7C17.7,15.2,15.1,17.7,12,17.7z"/>
+                      <path d="M12,7.8c-2.3,0-4.2,1.9-4.2,4.2c0,2.3,1.9,4.2,4.2,4.2c2.3,0,4.2-1.9,4.2-4.2C16.2,9.7,14.3,7.8,12,7.8z M13.6,14.3h-3.1
+                      v-0.9h1.1v-3.1h-1.1V9.5h2v3.9h1.1V14.3z"/>
+                    </svg>
+                    <span className="absolute -right-2 -top-2 flex h-4 w-4">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-4 w-4 bg-white"></span>
+                    </span>
+                  </div>
+                </a>
+              </div>
+              <div className="mt-2 ml-1 text-sm text-right">
+                <a 
+                  href="http://topmate.io/noel_regis"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary font-semibold hover:underline"
+                >
+                  Book a session on Topmate <ExternalLink className="ml-1 h-3 w-3" />
                 </a>
               </div>
             </div>

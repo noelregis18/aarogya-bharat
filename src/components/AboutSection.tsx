@@ -1,6 +1,5 @@
 
 import { CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
   return (
@@ -36,10 +35,6 @@ const AboutSection = () => {
                 <p>Ensure privacy and control over sensitive health information</p>
               </div>
             </div>
-            
-            <Button className="bg-primary hover:bg-primary/90 text-white mt-8">
-              Learn More About Our Technology
-            </Button>
           </div>
           
           <div className="relative section-transition">

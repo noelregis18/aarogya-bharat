@@ -1,8 +1,16 @@
 
+import { useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PatientForm from "./PatientForm";
 
 const HeroSection = () => {
+  const [isPatientFormOpen, setIsPatientFormOpen] = useState(false);
+
+  const handleLearnMoreClick = () => {
+    window.open("https://abdm.gov.in/", "_blank");
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0 bg-gradient-to-br from-darkBg to-darkBg/90 dark:from-darkBg dark:to-darkBg/80 z-0"></div>
@@ -17,10 +25,17 @@ const HeroSection = () => {
             Aarogya Bharat utilizes Tezos blockchain technology to securely store and manage patients' medical histories in the cloud, enhancing security and efficiency through blockchain's immutable and decentralized features.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-6 rounded-lg text-lg">
+            <Button 
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-6 rounded-lg text-lg"
+              onClick={() => setIsPatientFormOpen(true)}
+            >
               Get Started
             </Button>
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 px-6 py-6 rounded-lg text-lg">
+            <Button 
+              variant="outline" 
+              className="border-white/20 text-white hover:bg-white/10 px-6 py-6 rounded-lg text-lg"
+              onClick={handleLearnMoreClick}
+            >
               Learn More
             </Button>
           </div>
@@ -33,6 +48,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      <PatientForm isOpen={isPatientFormOpen} onClose={() => setIsPatientFormOpen(false)} />
     </section>
   );
 };

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Linkedin, Github, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ const ContactSection = () => {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -21,18 +23,51 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
     
-    // Show success toast
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. We'll get back to you soon.",
-    });
-    
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      // Using EmailJS service to send emails
+      const formData = new FormData();
+      formData.append("from_name", formData.name);
+      formData.append("reply_to", formData.email);
+      formData.append("message", formData.message);
+      formData.append("to_email", "noel.regis04@gmail.com");
+      
+      const response = await fetch("https://formsubmit.co/noel.regis04@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thanks for reaching out. We'll get back to you soon.",
+        });
+        
+        // Reset form
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleMapClick = () => {
+    window.open("https://www.google.com/maps/place/Asansol,+West+Bengal", "_blank");
   };
 
   return (
@@ -55,7 +90,13 @@ const ContactSection = () => {
           <div className="glass-card rounded-xl p-8 section-transition">
             <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
             
-            <form onSubmit={handleSubmit}>
+            <form action="https://formsubmit.co/noel.regis04@gmail.com" method="POST" onSubmit={handleSubmit}>
+              <input type="hidden" name="_subject" value="New message from Aarogya Bharat website" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="text" name="_honey" style={{ display: "none" }} />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value={window.location.href} />
+              
               <div className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block mb-2">
@@ -104,8 +145,12 @@ const ContactSection = () => {
                   />
                 </div>
                 
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                  Send Message
+                <Button 
+                  type="submit" 
+                  className="w-full bg-primary hover:bg-primary/90"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </div>
             </form>
@@ -142,11 +187,11 @@ const ContactSection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
+              <div className="flex items-start cursor-pointer" onClick={handleMapClick}>
                 <MapPin className="text-primary mr-4 h-6 w-6 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Location</h4>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground hover:text-primary transition-colors">
                     Asansol, West Bengal, India
                   </p>
                 </div>
@@ -194,10 +239,13 @@ const ContactSection = () => {
                   className="bg-background p-3 rounded-full hover:bg-primary/10 transition-colors"
                   aria-label="Topmate"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 8v8" />
-                    <path d="M8 12h8" />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" className="h-6 w-6">
+                    <path d="M19.4,7.3L19.1,7c0,0-0.1-0.1-0.1-0.1l-0.9-0.4c0,0-0.1,0-0.1-0.1l-1.4-0.3C12.7,4.1,8.1,6.9,8.1,6.9L6.5,8.1L4.8,10.5
+                    l-0.3,2.9l0.2,1.8l0,0c0.2,1.1,0.6,2.1,1.2,3l0.8,1.2l1.7,1.8l1.3,0.8c0.1,0.1,0.3,0.1,0.4,0.2l1.5,0.6c1.8,0.6,3.8,0.5,5.5-0.1
+                    l2.1-1l1.1-1.1c0,0,0,0,0,0c0.1-0.1,0.2-0.3,0.3-0.4l1.2-2.1c0.3-0.5,0.4-1.1,0.5-1.6l0.4-2.9L19.4,7.3z M12,17.7
+                    c-3.1,0-5.7-2.5-5.7-5.7c0-3.1,2.5-5.7,5.7-5.7c3.1,0,5.7,2.5,5.7,5.7C17.7,15.2,15.1,17.7,12,17.7z"/>
+                    <path d="M12,7.8c-2.3,0-4.2,1.9-4.2,4.2c0,2.3,1.9,4.2,4.2,4.2c2.3,0,4.2-1.9,4.2-4.2C16.2,9.7,14.3,7.8,12,7.8z M13.6,14.3h-3.1
+                    v-0.9h1.1v-3.1h-1.1V9.5h2v3.9h1.1V14.3z"/>
                   </svg>
                 </a>
               </div>

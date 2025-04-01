@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import PricingPlans from "./PricingPlans";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPricingOpen, setIsPricingOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +41,11 @@ const Navbar = () => {
           <a href="#features" className="hover:text-primary transition-colors">Features</a>
           <a href="#about" className="hover:text-primary transition-colors">About</a>
           <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-          <Button variant="outline" className="border-primary hover:bg-primary hover:text-white transition-colors">
+          <Button 
+            variant="outline" 
+            className="border-primary hover:bg-primary hover:text-white transition-colors"
+            onClick={() => setIsPricingOpen(true)}
+          >
             Connect Wallet
           </Button>
           <ThemeToggle />
@@ -79,12 +85,21 @@ const Navbar = () => {
             >
               Contact
             </a>
-            <Button variant="outline" className="border-primary hover:bg-primary hover:text-white transition-colors">
+            <Button 
+              variant="outline" 
+              className="border-primary hover:bg-primary hover:text-white transition-colors"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsPricingOpen(true);
+              }}
+            >
               Connect Wallet
             </Button>
           </div>
         </nav>
       )}
+
+      <PricingPlans isOpen={isPricingOpen} onClose={() => setIsPricingOpen(false)} />
     </header>
   );
 };

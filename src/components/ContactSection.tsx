@@ -28,16 +28,16 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Using EmailJS service to send emails
-      const formData = new FormData();
-      formData.append("from_name", formData.name);
-      formData.append("reply_to", formData.email);
-      formData.append("message", formData.message);
-      formData.append("to_email", "noel.regis04@gmail.com");
+      // Using FormSubmit service to send emails
+      const formSubmitData = new FormData();
+      formSubmitData.append("from_name", formData.name);
+      formSubmitData.append("reply_to", formData.email);
+      formSubmitData.append("message", formData.message);
+      formSubmitData.append("to_email", "noel.regis04@gmail.com");
       
       const response = await fetch("https://formsubmit.co/noel.regis04@gmail.com", {
         method: "POST",
-        body: formData,
+        body: formSubmitData,
         headers: {
           Accept: "application/json",
         },

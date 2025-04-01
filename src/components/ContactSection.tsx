@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { LinkedIn, Github, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Github, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -165,7 +164,7 @@ const ContactSection = () => {
                   className="bg-background p-3 rounded-full hover:bg-primary/10 transition-colors"
                   aria-label="LinkedIn"
                 >
-                  <LinkedIn className="h-6 w-6" />
+                  <Linkedin className="h-6 w-6" />
                 </a>
                 
                 <a
